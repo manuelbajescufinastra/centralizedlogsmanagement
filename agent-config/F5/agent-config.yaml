@@ -1,0 +1,17 @@
+logs:
+  configs:
+  - name: default
+    positions:
+      filename: /tmp/positions.yaml
+    scrape_configs:
+      - job_name: varlogs
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: varlogs
+              __path__: /var/log/*log
+              vm: linux-vm1
+              sender: manuel
+    clients:
+      - url: http://loki.private.acmpocdns.com/loki/api/v1/push
+	  
