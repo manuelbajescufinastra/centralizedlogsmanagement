@@ -3,39 +3,125 @@ logs:
   - name: default
     positions:
       filename: /tmp/positions.yaml
-  scrape_configs:
-  - job_name: system_audit
-    pipeline_stages:
-    static_configs:
-    - targets: [localhost]
-       labels:
-        job: audit
-        __path__: /var/log/audit
-        vm: F5
-  - job_name: system_boot
-    pipeline_stages:
-    static_configs:
-    - targets: [localhost]
-       labels:
-        job: boot
-        __path__: /var/log/boot.log
-        vm: F5
-  - job_name: system_cron
-    pipeline_stages:
-    static_configs:
-    - targets: [localhost]
-       labels:
-        job: cron
-        __path__: /var/log/cron
-        vm: F5
-  - job_name: system_system
-    pipeline_stages:
-    static_configs:
-    - targets: [localhost]
-       labels:
-        job: system
-        __path__: /var/log/messages
-        vm: F5               
+    scrape_configs:
+      - job_name: audit
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: audit
+              __path__: /var/log/audit
+              vm: F5
+      - job_name: boot
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: boot
+              __path__: /var/log/boot.log
+              vm: F5
+      - job_name: cron
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: cron
+              __path__: /var/log/cron
+              vm: F5
+      - job_name: daemon
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: daemon
+              __path__: /var/log/daemon.log
+              vm: F5
+      - job_name: dmesg
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: dmesg
+              __path__: /var/log/dmesg
+              vm: F5
+      - job_name: gslb
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: gslb
+              __path__: /var/log/gtm
+              vm: F5
+      - job_name: httpd
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: httpd
+              __path__: /var/log/httpd/httpd_errors
+              vm: F5
+      - job_name: kernel
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: kernel
+              __path__: /var/log/kern.log
+              vm: F5
+      - job_name: local_traffic
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: local_traffic
+              __path__: /var/log/ltm
+              vm: F5
+      - job_name: mail
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: mail
+              __path__: /var/log/maillog
+              vm: F5
+      - job_name: sync
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: sync
+              __path__: /var/log/nsyncd.log
+              vm: F5
+      - job_name: packet_filter
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: packet_filter
+              __path__: /var/log/pktfilter
+              vm: F5
+      - job_name: security
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: security
+              __path__: /var/log/secure
+              vm: F5
+      - job_name: system
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: system
+              __path__: /var/log/messages
+              vm: F5
+      - job_name: tmm
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: tmm
+              __path__: /var/log/tmm
+              vm: F5
+      - job_name: user
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: user
+              __path__: /var/log/user.log
+              vm: F5
+      - job_name: webui
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: webui
+              __path__: /var/log/webui.log
+              vm: F5
     clients:
       - url: http://loki.private.acmpocdns.com/loki/api/v1/push
-	  
