@@ -15,8 +15,7 @@ logs:
   - job_name: system_boot
     pipeline_stages:
     static_configs:
-    - targets:
-      - localhost
+    - targets: [localhost]
        labels:
         job: boot
         __path__: /var/log/boot.log
