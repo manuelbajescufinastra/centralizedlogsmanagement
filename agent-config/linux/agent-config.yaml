@@ -4,14 +4,61 @@ logs:
     positions:
       filename: /tmp/positions.yaml
     scrape_configs:
-      - job_name: varlogs
+      - job_name: messages
         static_configs:
           - targets: [localhost]
             labels:
-              job: varlogs
-              __path__: /var/log/*log
+              job: messages
+              __path__: /var/log/dmesg
               vm: linux-vm1
-              sender: manuel
+      - job_name: secure
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: secure
+              __path__: /var/log/auth
+              vm: linux-vm1
+      - job_name: syslog
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: syslog
+              __path__: /var/log/syslog
+              vm: linux-vm1
+      - job_name: kern
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: kern
+              __path__: /var/log/kern.log
+              vm: linux-vm1
+      - job_name: wagent
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: waagent
+              __path__: /var/log/waagent.log
+              vm: linux-vm1              
+      - job_name: dpkg
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: dpkg
+              __path__: /var/log/dpkg.log
+              vm: linux-vm1              
+      - job_name: nginx
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: nginx
+              __path__: /var/log/nginx/*log
+              vm: linux-vm1       
+      - job_name: alternatives
+        static_configs:
+          - targets: [localhost]
+            labels:
+              job: alternatives
+              __path__: /var/log/alternatives.log
+              vm: linux-vm1                  
     clients:
       - url: http://loki.private.acmpocdns.com/loki/api/v1/push
-	  
