@@ -3,15 +3,40 @@ logs:
   - name: default
     positions:
       filename: /tmp/positions.yaml
-    scrape_configs:
-      - job_name: varlogs
-        static_configs:
-          - targets: [localhost]
-            labels:
-              job: varlogs
-              __path__: /var/log/*log
-              vm: linux-vm1
-              sender: manuel
+  scrape_configs:
+  - job_name: system_audit
+    pipeline_stages:
+    static_configs:
+    - targets: [localhost]
+       labels:
+        job: audit
+        __path__: /var/log/audit
+        vm: F5
+  - job_name: system_boot
+    pipeline_stages:
+    static_configs:
+    - targets:
+      - localhost
+       labels:
+        job: boot
+        __path__: /var/log/boot.log
+        vm: F5
+  - job_name: system_cron
+    pipeline_stages:
+    static_configs:
+    - targets: [localhost]
+       labels:
+        job: cron
+        __path__: /var/log/cron
+        vm: F5
+  - job_name: system_system
+    pipeline_stages:
+    static_configs:
+    - targets: [localhost]
+       labels:
+        job: system
+        __path__: /var/log/messages
+        vm: F5               
     clients:
       - url: http://loki.private.acmpocdns.com/loki/api/v1/push
 	  
