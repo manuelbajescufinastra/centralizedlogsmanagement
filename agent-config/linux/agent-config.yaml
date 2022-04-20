@@ -4,60 +4,60 @@ logs:
     positions:
       filename: /tmp/positions.yaml
     scrape_configs:
-      - job_name: messages
+      - log_name: messages
         static_configs:
           - targets: [localhost]
             labels:
-              job: messages
+              log_type: messages
               __path__: /var/log/dmesg
               vm: linux-vm1
-      - job_name: secure
+      - log_name: secure
         static_configs:
           - targets: [localhost]
             labels:
-              job: secure
+              log_type: secure
               __path__: /var/log/auth
               vm: linux-vm1
-      - job_name: syslog
+      - log_name: syslog
         static_configs:
           - targets: [localhost]
             labels:
-              job: syslog
+              log_type: syslog
               __path__: /var/log/syslog
               vm: linux-vm1
-      - job_name: kern
+      - log_name: kern
         static_configs:
           - targets: [localhost]
             labels:
-              job: kern
+              log_type: kern
               __path__: /var/log/kern.log
               vm: linux-vm1
-      - job_name: wagent
+      - log_name: wagent
         static_configs:
           - targets: [localhost]
             labels:
-              job: waagent
+              log_type: waagent
               __path__: /var/log/waagent.log
               vm: linux-vm1              
-      - job_name: dpkg
+      - log_name: dpkg
         static_configs:
           - targets: [localhost]
             labels:
-              job: dpkg
+              log_type: dpkg
               __path__: /var/log/dpkg.log
               vm: linux-vm1              
-      - job_name: nginx
+      - log_name: nginx
         static_configs:
           - targets: [localhost]
             labels:
-              job: nginx
+              log_type: nginx
               __path__: /var/log/nginx/*log
               vm: linux-vm1       
-      - job_name: alternatives
+      - log_name: alternatives
         static_configs:
           - targets: [localhost]
             labels:
-              job: alternatives
+              log_type: alternatives
               __path__: /var/log/alternatives.log
               vm: linux-vm1                  
     clients:

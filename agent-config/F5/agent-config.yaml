@@ -4,123 +4,123 @@ logs:
     positions:
       filename: /tmp/positions.yaml
     scrape_configs:
-      - job_name: audit
+      - log_name: audit
         static_configs:
           - targets: [localhost]
             labels:
-              job: audit
+              log_type: audit
               __path__: /var/log/audit
               vm: F5
-      - job_name: boot
+      - log_name: boot
         static_configs:
           - targets: [localhost]
             labels:
-              job: boot
+              log_type: boot
               __path__: /var/log/boot.log
               vm: F5
-      - job_name: cron
+      - log_name: cron
         static_configs:
           - targets: [localhost]
             labels:
-              job: cron
+              log_type: cron
               __path__: /var/log/cron
               vm: F5
-      - job_name: daemon
+      - log_name: daemon
         static_configs:
           - targets: [localhost]
             labels:
-              job: daemon
+              log_type: daemon
               __path__: /var/log/daemon.log
               vm: F5
-      - job_name: dmesg
+      - log_name: dmesg
         static_configs:
           - targets: [localhost]
             labels:
-              job: dmesg
+              log_type: dmesg
               __path__: /var/log/dmesg
               vm: F5
-      - job_name: gslb
+      - log_name: gslb
         static_configs:
           - targets: [localhost]
             labels:
-              job: gslb
+              log_type: gslb
               __path__: /var/log/gtm
               vm: F5
-      - job_name: httpd
+      - log_name: httpd
         static_configs:
           - targets: [localhost]
             labels:
-              job: httpd
+              log_type: httpd
               __path__: /var/log/httpd/httpd_errors
               vm: F5
-      - job_name: kernel
+      - log_name: kernel
         static_configs:
           - targets: [localhost]
             labels:
-              job: kernel
+              log_type: kernel
               __path__: /var/log/kern.log
               vm: F5
-      - job_name: local_traffic
+      - log_name: local_traffic
         static_configs:
           - targets: [localhost]
             labels:
-              job: local_traffic
+              log_type: local_traffic
               __path__: /var/log/ltm
               vm: F5
-      - job_name: mail
+      - log_name: mail
         static_configs:
           - targets: [localhost]
             labels:
-              job: mail
+              log_type: mail
               __path__: /var/log/maillog
               vm: F5
-      - job_name: sync
+      - log_name: sync
         static_configs:
           - targets: [localhost]
             labels:
-              job: sync
+              log_type: sync
               __path__: /var/log/nsyncd.log
               vm: F5
-      - job_name: packet_filter
+      - log_name: packet_filter
         static_configs:
           - targets: [localhost]
             labels:
-              job: packet_filter
+              log_type: packet_filter
               __path__: /var/log/pktfilter
               vm: F5
-      - job_name: security
+      - log_name: security
         static_configs:
           - targets: [localhost]
             labels:
-              job: security
+              log_type: security
               __path__: /var/log/secure
               vm: F5
-      - job_name: system
+      - log_name: system
         static_configs:
           - targets: [localhost]
             labels:
-              job: system
+              log_type: system
               __path__: /var/log/messages
               vm: F5
-      - job_name: tmm
+      - log_name: tmm
         static_configs:
           - targets: [localhost]
             labels:
-              job: tmm
+              log_type: tmm
               __path__: /var/log/tmm
               vm: F5
-      - job_name: user
+      - log_name: user
         static_configs:
           - targets: [localhost]
             labels:
-              job: user
+              log_type: user
               __path__: /var/log/user.log
               vm: F5
-      - job_name: webui
+      - log_name: webui
         static_configs:
           - targets: [localhost]
             labels:
-              job: webui
+              log_type: webui
               __path__: /var/log/webui.log
               vm: F5
     clients:
