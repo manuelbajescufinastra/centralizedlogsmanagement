@@ -4,119 +4,119 @@ logs:
     positions:
       filename: /tmp/positions.yaml
     scrape_configs:
-      - log_name: audit
+      - job_name: audit
         static_configs:
           - targets: [localhost]
             labels:
               log_type: audit
               __path__: /var/log/audit
               vm: F5
-      - log_name: boot
+      - job_name: boot
         static_configs:
           - targets: [localhost]
             labels:
               log_type: boot
               __path__: /var/log/boot.log
               vm: F5
-      - log_name: cron
+      - job_name: cron
         static_configs:
           - targets: [localhost]
             labels:
               log_type: cron
               __path__: /var/log/cron
               vm: F5
-      - log_name: daemon
+      - job_name: daemon
         static_configs:
           - targets: [localhost]
             labels:
               log_type: daemon
               __path__: /var/log/daemon.log
               vm: F5
-      - log_name: dmesg
+      - job_name: dmesg
         static_configs:
           - targets: [localhost]
             labels:
               log_type: dmesg
               __path__: /var/log/dmesg
               vm: F5
-      - log_name: gslb
+      - job_name: gslb
         static_configs:
           - targets: [localhost]
             labels:
               log_type: gslb
               __path__: /var/log/gtm
               vm: F5
-      - log_name: httpd
+      - job_name: httpd
         static_configs:
           - targets: [localhost]
             labels:
               log_type: httpd
               __path__: /var/log/httpd/httpd_errors
               vm: F5
-      - log_name: kernel
+      - job_name: kernel
         static_configs:
           - targets: [localhost]
             labels:
               log_type: kernel
               __path__: /var/log/kern.log
               vm: F5
-      - log_name: local_traffic
+      - job_name: local_traffic
         static_configs:
           - targets: [localhost]
             labels:
               log_type: local_traffic
               __path__: /var/log/ltm
               vm: F5
-      - log_name: mail
+      - job_name: mail
         static_configs:
           - targets: [localhost]
             labels:
               log_type: mail
               __path__: /var/log/maillog
               vm: F5
-      - log_name: sync
+      - job_name: sync
         static_configs:
           - targets: [localhost]
             labels:
               log_type: sync
               __path__: /var/log/nsyncd.log
               vm: F5
-      - log_name: packet_filter
+      - job_name: packet_filter
         static_configs:
           - targets: [localhost]
             labels:
               log_type: packet_filter
               __path__: /var/log/pktfilter
               vm: F5
-      - log_name: security
+      - job_name: security
         static_configs:
           - targets: [localhost]
             labels:
               log_type: security
               __path__: /var/log/secure
               vm: F5
-      - log_name: system
+      - job_name: system
         static_configs:
           - targets: [localhost]
             labels:
               log_type: system
               __path__: /var/log/messages
               vm: F5
-      - log_name: tmm
+      - job_name: tmm
         static_configs:
           - targets: [localhost]
             labels:
               log_type: tmm
               __path__: /var/log/tmm
               vm: F5
-      - log_name: user
+      - job_name: user
         static_configs:
           - targets: [localhost]
             labels:
               log_type: user
               __path__: /var/log/user.log
               vm: F5
-      - log_name: webui
+      - job_name: webui
         static_configs:
           - targets: [localhost]
             labels:

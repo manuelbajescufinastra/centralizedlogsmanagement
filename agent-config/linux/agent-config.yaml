@@ -4,56 +4,56 @@ logs:
     positions:
       filename: /tmp/positions.yaml
     scrape_configs:
-      - log_name: messages
+      - job_name: messages
         static_configs:
           - targets: [localhost]
             labels:
               log_type: messages
               __path__: /var/log/dmesg
               vm: linux-vm1
-      - log_name: secure
+      - job_name: secure
         static_configs:
           - targets: [localhost]
             labels:
               log_type: secure
               __path__: /var/log/auth
               vm: linux-vm1
-      - log_name: syslog
+      - job_name: syslog
         static_configs:
           - targets: [localhost]
             labels:
               log_type: syslog
               __path__: /var/log/syslog
               vm: linux-vm1
-      - log_name: kern
+      - job_name: kern
         static_configs:
           - targets: [localhost]
             labels:
               log_type: kern
               __path__: /var/log/kern.log
               vm: linux-vm1
-      - log_name: wagent
+      - job_name: wagent
         static_configs:
           - targets: [localhost]
             labels:
               log_type: waagent
               __path__: /var/log/waagent.log
               vm: linux-vm1              
-      - log_name: dpkg
+      - job_name: dpkg
         static_configs:
           - targets: [localhost]
             labels:
               log_type: dpkg
               __path__: /var/log/dpkg.log
               vm: linux-vm1              
-      - log_name: nginx
+      - job_name: nginx
         static_configs:
           - targets: [localhost]
             labels:
               log_type: nginx
               __path__: /var/log/nginx/*log
               vm: linux-vm1       
-      - log_name: alternatives
+      - job_name: alternatives
         static_configs:
           - targets: [localhost]
             labels:

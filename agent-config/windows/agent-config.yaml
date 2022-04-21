@@ -10,14 +10,14 @@ logs:
       clients:
         - url: http://loki.private.acmpocdns.com/loki/api/v1/push
       scrape_configs:
-      - log_name: windows
+      - job_name: windows
         windows_events:
           # Note the directory structure must already exist but the file will be created on demand
           bookmark_path: "C:\\opt\\bookmark\\bookmark.xml"
           use_incoming_timestamp: false
-          eventlog_name: "Application"
+          log_type: "Application"
           # Filter for logs
           xpath_query: '*'
           labels:
-            log_type: windows
+            log_type: application
             vm: windows-vm
