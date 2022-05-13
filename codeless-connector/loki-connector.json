@@ -1,0 +1,46 @@
+{
+    "kind": "<name>",
+    "properties": {
+        "connectorUiConfig": {
+            "id": 12345,
+            "title": "Loki Connector Page",
+            "publisher": "Finastra",
+            "descriptionMarkdown": "Centralized logs management PoC - Connector to Loki",
+            "additionalRequirementBanner": "Text for the Prerequisites section of the Instructions tab",
+            "graphQueriesTableName": "Defines the name of the Log Analytics table from which data for your queries is pulled."
+
+        },
+        "pollingConfig": {
+            "auth": {
+                "authType": "APIKey",
+                "APIKeyIdentifier": "token",
+                "APIKeyName": "Authorization"
+             },
+             "request": {
+                "apiEndpoint": "https://api.github.com/../{{placeHolder1}}/audit-log",
+                "rateLimitQPS": 50,
+                "queryWindowInMin": 15,
+                "httpMethod": "Get",
+                "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
+                "retryCount": 2,
+                "timeoutInSeconds": 60,
+                "headers": {
+                   "Accept": "application/json",
+                   "User-Agent": "Scuba"
+                },
+                "queryParameters": {
+                   "phrase": "created:{_QueryWindowStartTime}..{_QueryWindowEndTime}"
+                }
+             },
+             "paging": {
+                "pagingType": "LinkHeader",
+                "pageSizeParaName": "per_page"
+             },
+             "response": {
+                "eventsJsonPaths": [
+                  "$"
+                ]
+             }
+        }
+    }
+}
