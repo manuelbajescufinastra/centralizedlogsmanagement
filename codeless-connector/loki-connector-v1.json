@@ -1,0 +1,118 @@
+{
+   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {
+       "workspace": {
+           "type": "string",
+           "defaultValue": "clmworkspace"
+       }
+   },
+   "resources": [
+       {
+           "id": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name,'/providers/Microsoft.OperationalInsights/workspaces/',parameters('workspace'),'/providers/Microsoft.SecurityInsights/dataConnectors/',guid(subscription().subscriptionId))]",
+           "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',guid(subscription().subscriptionId))]",
+           "apiVersion": "2021-03-01-preview",
+           "type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectors",
+           "kind": "APIPolling",
+           "properties": {
+               "connectorUiConfig": {
+                   "title": "Loki Connector",
+                   "publisher": "Finastra - Architecture and Practice Team",
+                   "descriptionMarkdown": "Connector for Loki instance",
+                   "graphQueriesTableName": "LogsTable_CL",
+                   "graphQueries": [{
+                           "metricName": "Total logs received",
+                           "legend": "{{graphQueriesTableName}}",
+                           "baseQuery": "{{graphQueriesTableName}}"
+                       }
+                   ],
+                   "sampleQueries": [{
+                           "description": "Top 10 logs detected",
+                           "query": "{{graphQueriesTableName}}\n | sort by TimeGenerated\n | take 10"
+                       }
+                   ],
+                   "dataTypes": [{
+                           "name": "{{graphQueriesTableName}}",
+                           "lastDataReceivedQuery": "{{graphQueriesTableName}}\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+                       }
+                   ],
+                   "connectivityCriterias": [{
+                           "type": "SentinelKindsV2",
+                           "value": [
+                               "APIPolling"
+                           ]
+                       }
+                   ],
+                   "availability": {
+                       "status": 1,
+                       "isPreview": true
+                   },
+                   "permissions": {
+                       "resourceProvider": [{
+                               "provider": "Microsoft.OperationalInsights/workspaces",
+                               "permissionsDisplayText": "read and write permissions are required.",
+                               "providerDisplayName": "Workspace",
+                               "scope": "Workspace",
+                               "requiredPermissions": {
+                                   "action": true,
+                                   "write": true,
+                                   "read": true,
+                                   "delete": true
+                               }
+                           }
+                       ],
+                       "customs": [ {
+                               "name": "Include custom pre-requisites if the connectivity requires like API key etc. info - else delete customs",
+                               "description": "Description for any custom pre-requisite with link to documentation on how to get this pre-requisite fulfilled."
+                           }
+                       ]
+                   },
+                   "instructionSteps": [
+                       {
+                           "title": "Configuration parameter",
+                           "description": "1. How to get access to the data connector\n 2. If you have documentation to connect on your side link to that\n 3. Else, provide step by step instructions to discover the connection in your product\n",
+                           "instructions": [
+                               {
+                                   "parameters": {
+                                       "enable": "true"
+                                   },
+                                   "type": "Input type for e.g. APIKey"
+                               }
+                           ]
+                       }
+                   ]
+               },
+               "pollingConfig": 
+                   {
+    "auth": {
+        "authType": "APIKey",
+        "APIKeyIdentifier": "token",
+        "APIKeyName": "Authorization"
+     },
+     "request": {
+        "apiEndpoint": "http://20.105.202.146:3100/loki/api/v1/query",
+        "rateLimitQPS": 50,
+        "queryWindowInMin": 15,
+        "httpMethod": "Get",
+        "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
+        "retryCount": 2,
+        "timeoutInSeconds": 60,
+        "headers": {
+           "Accept": "application/json",
+           "query": "{job='local_traffic'}"
+        }
+     },
+     "paging": {
+        "pagingType": "LinkHeader",
+        "pageSizeParaName": "per_page"
+     },
+     "response": {
+        "eventsJsonPaths": [
+          "$"
+        ]
+     }
+}
+           }
+           }
+   ]
+}
