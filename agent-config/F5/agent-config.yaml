@@ -62,11 +62,27 @@ logs:
               vm: F5
       - job_name: local_traffic
         static_configs:
-          - targets: [localhost]
+          - targets:
+              - localhost
             labels:
+              job: local_traffic
               log_type: local_traffic
               __path__: /var/log/ltm
               vm: F5
+        pipeline_stages:
+        - match:
+            selector: '{job="local_traffic"}'
+            stages:
+            - regex:
+                 expression: "(?P<timestamp>[a-zA-Z]+ [0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]) (?P<host>[a-z0-9.]+) (?P<level>[a-z]+) (?P<service>[a-z0-9.]+)\\[(?P<pid>[0-9]+)\\]: (?P<message_code>\\d{8}:\\d{1}): (?P<message_text>.+).*"
+            - labels:
+               timestamp:
+               host:
+               level:
+               service:
+               pid:
+               message_code:
+               message_text:
       - job_name: mail
         static_configs:
           - targets: [localhost]
@@ -90,11 +106,22 @@ logs:
               vm: F5
       - job_name: security
         static_configs:
-          - targets: [localhost]
+          - targets:
+              - localhost
             labels:
               log_type: security
+              job: security
               __path__: /var/log/secure
               vm: F5
+        pipeline_stages:
+        - match:
+            selector: '{job="security"}'
+            stages:
+            - regex:
+                 expression: ".*user=(?P<user>[a-zA-Z]+).*"
+            - labels:
+               user:
+               level:
       - job_name: system
         static_configs:
           - targets: [localhost]
@@ -123,5 +150,23 @@ logs:
               log_type: webui
               __path__: /var/log/webui.log
               vm: F5
+      - job_name: monitor
+        static_configs:
+        - targets:
+            - localhost
+          labels:
+            job: monitor
+            log_type: monitor
+            __path__: /var/log/monitors/*log
+            vm: F5
+        pipeline_stages:
+        - match:
+            selector: '{job="monitor"}'
+            stages:
+            - regex:
+                 expression: ".*ID (?P<id>[0-9]+).* (?P<status>(UP|DOWN))(.*) .*addr=::ffff:(?P<addr>[0-9].+) src.*"
+            - labels:
+               status:
+               addr:
     clients:
       - url: http://loki.private.acmpocdns.com/loki/api/v1/push
