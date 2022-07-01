@@ -74,7 +74,7 @@ logs:
             selector: '{job="local_traffic"}'
             stages:
             - regex:
-                 expression: "(?P<timestamp>[a-zA-Z]+ [0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]) (?P<host>[a-z0-9.]+) (?P<level>[a-z]+) (?P<service>[a-z0-9.]+)\\[(?P<pid>[0-9]+)\\]: (?P<message_code>\\d{8}:\\d{1}): (?P<message_text>.+).*"
+                 expression: "(?P<timestamp>[a-zA-Z]+ *[0-9]*[0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]) (?P<host>[a-z0-9.]+) (?P<level>[a-z]+) (?P<service>[a-z0-9.]+)\\[(?P<pid>[0-9]+)\\]: (?P<message_code>[a-f0-9]{8}:\\d{1}): (?P<message_text>.+).*"
             - labels:
                timestamp:
                host:
@@ -118,10 +118,15 @@ logs:
             selector: '{job="security"}'
             stages:
             - regex:
-                 expression: ".*user=(?P<user>[a-zA-Z]+).*"
+                 expression: "(?P<timestamp>[a-zA-Z]+ *[0-9]*[0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]) (?P<host>[a-z0-9.]+) (?P<level>[a-z]+) (?P<service>[a-z0-9.]+)\\[(?P<pid>[0-9]+)\\]: (?P<message_code>.+): (?P<message_text>.+).*"
             - labels:
-               user:
+               timestamp:
+               host:
                level:
+               service:
+               pid:
+               message_code:
+               message_text:
       - job_name: system
         static_configs:
           - targets: [localhost]
